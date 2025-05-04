@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://dk8ow81g23q63"]
+
+[ext_resource type="Script" path="res://gameManager.gd" id="1_o0tlg"]
+[ext_resource type="PackedScene" uid="uid://ud0fhhmvmu6y" path="res://Assets/Prefabs/cardPrefab.tscn" id="2_jrckd"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Node" type="Node" parent="."]
+script = ExtResource("1_o0tlg")
+
+[node name="Spade" parent="." instance=ExtResource("2_jrckd")]
+position = Vector2(141, 266)

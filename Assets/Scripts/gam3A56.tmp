@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://dk8ow81g23q63"]
+
+[ext_resource type="Script" path="res://gameManager.gd" id="1_o0tlg"]
+[ext_resource type="PackedScene" uid="uid://ud0fhhmvmu6y" path="res://Assets/Prefabs/cardPrefab.tscn" id="2_jrckd"]
+[ext_resource type="Script" path="res://Assets/Scripts/cardClass.gd" id="3_44l8y"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Node" type="Node" parent="."]
+script = ExtResource("1_o0tlg")
+
+[node name="Club" parent="." instance=ExtResource("2_jrckd")]
+position = Vector2(69, 350)
+scale = Vector2(0.227919, 0.227919)
+script = ExtResource("3_44l8y")
+
+[connection signal="mouse_entered" from="Club" to="Club" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Club" to="Club" method="_on_mouse_exited"]

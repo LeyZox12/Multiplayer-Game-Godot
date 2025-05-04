@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://da6bakvdyqqxh"]
+
+[ext_resource type="Script" path="res://Scenes/black_jack.gd" id="1_qnqn4"]
+
+[node name="BlackJack" type="Node2D"]
+texture_filter = 1
+script = ExtResource("1_qnqn4")

@@ -1,0 +1,55 @@
+[gd_scene load_steps=2 format=3 uid="uid://kx7j120v8sir"]
+
+[sub_resource type="Theme" id="Theme_0f8jk"]
+
+[node name="Menu" type="Node2D"]
+
+[node name="Control" type="Control" parent="."]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1154.0
+offset_bottom = 648.0
+theme = SubResource("Theme_0f8jk")
+
+[node name="Buttons" type="VBoxContainer" parent="Control"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -100.0
+offset_right = 100.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.455, 1.455)
+pivot_offset = Vector2(98.83, 31.735)
+
+[node name="Host" type="Button" parent="Control/Buttons"]
+layout_mode = 2
+text = "Host"
+
+[node name="Join" type="Button" parent="Control/Buttons"]
+layout_mode = 2
+text = "Join"
+
+[node name="Games_Container" type="GridContainer" parent="Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -193.0
+offset_top = -156.0
+offset_right = -154.0
+offset_bottom = -122.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(9.73879, 9.04877)
+columns = 3
