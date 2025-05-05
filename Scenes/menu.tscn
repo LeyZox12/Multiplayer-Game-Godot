@@ -4,6 +4,9 @@
 
 [node name="Menu" type="Node2D"]
 
+[node name="Camera" type="Camera2D" parent="."]
+position = Vector2(577, 324)
+
 [node name="Control" type="Control" parent="."]
 texture_filter = 1
 layout_mode = 3

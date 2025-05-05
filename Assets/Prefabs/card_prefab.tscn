@@ -16,9 +16,12 @@ scale = Vector2(0.375938, 0.375938)
 script = ExtResource("1_aaloo")
 
 [node name="background" type="Sprite2D" parent="."]
+z_index = 2
+position = Vector2(2.0504e-05, 0)
 texture = ExtResource("2_4k4lx")
 
 [node name="label" type="Label" parent="."]
+z_index = 2
 offset_left = 98.4205
 offset_top = 79.8004
 offset_right = 616.421
@@ -29,16 +32,19 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "0"
 
 [node name="label2" type="Label" parent="."]
-offset_left = -176.446
-offset_top = -256.649
-offset_right = 341.554
-offset_bottom = 92.3512
+z_index = 2
+offset_left = -119.701
+offset_top = -146.301
+offset_right = 398.299
+offset_bottom = 202.699
+rotation = -3.14159
 scale = Vector2(0.543022, 0.543022)
 theme = SubResource("Theme_3wtwt")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "0"
 
 [node name="suit" type="Sprite2D" parent="."]
+z_index = 2
 position = Vector2(1.78228, -12.476)
 scale = Vector2(0.565489, 0.565489)
 texture = ExtResource("3_pjdkq")
