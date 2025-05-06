@@ -5,11 +5,13 @@ var default_pos = Vector2(0, 0)
 var smooth_value = 5
 var speed = 100
 var mousepos
-var value
+var rank
 var suit
 var flipped = false
 var hovering = false
+var dragging = false
 var target_scale = $".".scale.x
+var target_pos = $".".position
 var dic = {11:"J",12:"Q",13:"K"}
 var default_texture = preload("res://Assets/Sprites/card.png")
 var flipped_texture = preload("res://Assets/Sprites/card_back.png")
@@ -29,6 +31,8 @@ var suit_textures = [
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if holding and hovering:
+		dragging = true
+	if dragging:
 		$".".position += (mousepos - $".".position) / smooth_value
 	elif hovering:
 		$".".position.x += (default_pos.x - $".".position.x) / smooth_value
@@ -45,20 +49,22 @@ func _process(delta: float) -> void:
 			for i in to_disable:
 				i.visible = true
 			$background.texture = default_texture
-
-func get_value() -> int:
-	return value
+			
+			
+func get_rank() -> int:
+	return rank
 
 func get_suit() -> int:
 	return suit
 
-func set_value(value: int) -> void:
+func set_rank(rank: int) -> void:
 	var txt = ""
-	if value>10:
-		txt = dic[value]
+	if rank>10:
+		txt = dic[rank]
+		rank = 10
 	else: 
-		txt = str(value)
-	self.value = value
+		txt = str(rank)
+	self.rank = rank
 	$label.text = txt
 	$label2.text = txt
 
@@ -74,19 +80,26 @@ func _input(event: InputEvent) -> void:
 		game_manager.card_held = true
 	elif event.is_action_released("click"):
 		holding = false
+		dragging = false
 		game_manager.card_held = false
+
+func set_target_pos(pos: Vector2):
+	target_pos = pos
+
 func _on_mouse_entered() -> void:
 	hovering = true
 	pass # Replace with function body.
 
 func _on_mouse_exited() -> void:
-	if not holding:
-		hovering = false
+	hovering = false
 	pass # Replace with function body.
 
 func set_flipped(state: bool):
-	#TODO
+	if flipped == state:
+		return
+	flip()
 	pass
 
 func flip():
 	target_scale = -target_scale
+	flipped = !flipped
