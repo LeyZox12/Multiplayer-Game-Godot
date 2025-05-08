@@ -1,0 +1,34 @@
+[gd_scene load_steps=7 format=3 uid="uid://da6bakvdyqqxh"]
+
+[ext_resource type="Script" path="res://Scenes/black_jack.gd" id="1_qnqn4"]
+[ext_resource type="Script" path="res://Scenes/CameraBehaviour.gd" id="2_4xx7m"]
+[ext_resource type="Script" path="res://dealer.gd" id="2_kdgjt"]
+[ext_resource type="Script" path="res://Table.gd" id="2_uy2bo"]
+[ext_resource type="Script" path="res://Player.gd" id="6_fdxyr"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ktnsr"]
+properties/0/path = NodePath("Dealer:cards")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath("Dealer:player_turn_index")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+
+[node name="BlackJack" type="Node2D"]
+texture_filter = 1
+script = ExtResource("1_qnqn4")
+
+[node name="Dealer" type="Node" parent="."]
+script = ExtResource("2_kdgjt")
+
+[node name="Camera" type="Camera2D" parent="."]
+script = ExtResource("2_4xx7m")
+
+[node name="Table" type="Node" parent="."]
+script = ExtResource("2_uy2bo")
+
+[node name="Player" type="Node" parent="."]
+script = ExtResource("6_fdxyr")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_ktnsr")

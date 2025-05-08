@@ -1,11 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://kx7j120v8sir"]
+[gd_scene load_steps=4 format=3 uid="uid://kx7j120v8sir"]
+
+[ext_resource type="PackedScene" uid="uid://di063aviuwqrl" path="res://Assets/Prefabs/game_manager.tscn" id="1_hsakb"]
+[ext_resource type="PackedScene" uid="uid://bwsqmd0c84jbp" path="res://Assets/Prefabs/server.tscn" id="2_omo0u"]
 
 [sub_resource type="Theme" id="Theme_0f8jk"]
 
 [node name="Menu" type="Node2D"]
 
-[node name="Camera" type="Camera2D" parent="."]
-position = Vector2(577, 324)
+[node name="GameManager" parent="." instance=ExtResource("1_hsakb")]
+
+[node name="Server" parent="." instance=ExtResource("2_omo0u")]
+
+[node name="Node" type="Node" parent="Server"]
 
 [node name="Control" type="Control" parent="."]
 texture_filter = 1

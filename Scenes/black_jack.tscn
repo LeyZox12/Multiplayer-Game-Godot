@@ -1,23 +1,38 @@
 [gd_scene load_steps=6 format=3 uid="uid://da6bakvdyqqxh"]
 
-[ext_resource type="Script" path="res://Scenes/black_jack.gd" id="1_qnqn4"]
-[ext_resource type="Script" path="res://Scenes/CameraBehaviour.gd" id="2_4xx7m"]
-[ext_resource type="Script" path="res://dealer.gd" id="2_kdgjt"]
-[ext_resource type="Script" path="res://Table.gd" id="2_uy2bo"]
-[ext_resource type="Script" path="res://Player.gd" id="6_fdxyr"]
+[ext_resource type="Script" path="res://Assets/Scripts/dealer.gd" id="2_kdgjt"]
+[ext_resource type="Script" path="res://Assets/Scripts/Table.gd" id="2_uy2bo"]
+[ext_resource type="Texture2D" uid="uid://6uubo3wromg3" path="res://Assets/Sprites/top_godot_dealer.png" id="2_wnj33"]
+[ext_resource type="Texture2D" uid="uid://dwm46pp07ruyr" path="res://Assets/Sprites/bottom_godot_dealer.png" id="3_6qw0j"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ktnsr"]
+properties/0/path = NodePath("Dealer:player_turn_index")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+properties/1/path = NodePath("Dealer:position")
+properties/1/spawn = true
+properties/1/replication_mode = 1
 
 [node name="BlackJack" type="Node2D"]
 texture_filter = 1
-script = ExtResource("1_qnqn4")
 
-[node name="Dealer" type="Node" parent="."]
-script = ExtResource("2_kdgjt")
-
-[node name="Camera" type="Camera2D" parent="."]
-script = ExtResource("2_4xx7m")
-
-[node name="Table" type="Node" parent="."]
+[node name="Table" type="Node2D" parent="."]
+position = Vector2(232, 164)
 script = ExtResource("2_uy2bo")
 
-[node name="Player" type="Node" parent="."]
-script = ExtResource("6_fdxyr")
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_ktnsr")
+
+[node name="Dealer" type="Node2D" parent="."]
+z_index = -1
+position = Vector2(503, -28)
+scale = Vector2(2.88547, 2.88547)
+script = ExtResource("2_kdgjt")
+
+[node name="Head" type="Sprite2D" parent="Dealer"]
+position = Vector2(0, -63.189)
+texture = ExtResource("2_wnj33")
+
+[node name="Body" type="Sprite2D" parent="Dealer"]
+position = Vector2(0, -63.189)
+texture = ExtResource("3_6qw0j")

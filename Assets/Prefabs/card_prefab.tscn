@@ -1,19 +1,37 @@
-[gd_scene load_steps=6 format=3 uid="uid://ud0fhhmvmu6y"]
+[gd_scene load_steps=7 format=3 uid="uid://ud0fhhmvmu6y"]
 
 [ext_resource type="Script" path="res://Assets/Scripts/card_class.gd" id="1_aaloo"]
 [ext_resource type="Texture2D" uid="uid://djcrf2hvv1r0" path="res://Assets/Sprites/card.png" id="2_4k4lx"]
 [ext_resource type="Texture2D" uid="uid://bgee65gek4ecu" path="res://Assets/Sprites/club.png" id="3_pjdkq"]
 
-[sub_resource type="Theme" id="Theme_3wtwt"]
-default_font_size = 256
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_8f35d"]
+properties/0/path = NodePath(".:flipped")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:default_pos")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath(".:target_scale")
+properties/2/spawn = true
+properties/2/replication_mode = 1
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cy0ec"]
-size = Vector2(497.422, 672.983)
+size = Vector2(497.422, 680.963)
+
+[sub_resource type="Theme" id="Theme_3wtwt"]
+default_font_size = 256
 
 [node name="Area2D" type="Area2D"]
 position = Vector2(-3, 2)
 scale = Vector2(0.375938, 0.375938)
 script = ExtResource("1_aaloo")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_8f35d")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(3.99002, -2.66012)
+shape = SubResource("RectangleShape2D_cy0ec")
 
 [node name="background" type="Sprite2D" parent="."]
 z_index = 2
@@ -48,10 +66,6 @@ z_index = 2
 position = Vector2(1.78228, -12.476)
 scale = Vector2(0.565489, 0.565489)
 texture = ExtResource("3_pjdkq")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(3.99002, 1.32999)
-shape = SubResource("RectangleShape2D_cy0ec")
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

@@ -1,17 +1,16 @@
 class_name card 
 extends Node
 var holding = false
-var default_pos = Vector2(0, 0)
+@export var default_pos: Vector2
 var smooth_value = 5
 var speed = 100
 var mousepos
 var rank
 var suit
-var flipped = false
+@export var flipped = false
 var hovering = false
 var dragging = false
-var target_scale = $".".scale.x
-var target_pos = $".".position
+@export var target_scale: float = $".".scale.x
 var dic = {11:"J",12:"Q",13:"K"}
 var default_texture = preload("res://Assets/Sprites/card.png")
 var flipped_texture = preload("res://Assets/Sprites/card_back.png")
@@ -26,7 +25,8 @@ var suit_textures = [
 	preload("res://Assets/Sprites/heart.png"),
 	preload("res://Assets/Sprites/spade.png")
 ]
-@onready var game_manager = get_tree().root.get_node("GameManager")
+
+@onready var game_manager = $"../../"
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -82,9 +82,6 @@ func _input(event: InputEvent) -> void:
 		holding = false
 		dragging = false
 		game_manager.card_held = false
-
-func set_target_pos(pos: Vector2):
-	target_pos = pos
 
 func _on_mouse_entered() -> void:
 	hovering = true
