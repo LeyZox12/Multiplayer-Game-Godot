@@ -8,6 +8,7 @@ var mousepos
 var rank
 var suit
 @export var flipped = false
+
 var hovering = false
 var dragging = false
 @export var target_scale: float = $".".scale.x

@@ -9,13 +9,16 @@ extends Node2D
 @export var player_turn_index = 0
 @export var dealer_hand = []
 
+
 const CARD_SEPARATION = 0.0
 var bets = []
-var game_state = ""
+@export var game_state = ""#TODO sync this value and use it to unable player from un ready when game is going
 var card_spacing = 0.3
 var table_built = false
 var default_card_pos
 var anim_done = false
+var current_player_action = ""
+@export var player_turn_id: int
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -32,7 +35,8 @@ func reset():
 				var index = rank + suit * 13
 				game_manager.add_card(Vector2(0, 0), rank+1, suit, 0.2, true)
 			
-		game_manager.cards.shuffle()
+		game_manager.shuffle_cards()
+
 		for i in range(game_manager.players.size()):
 			bets.push_back(0)
 			game_manager.players[i].is_ready = false
@@ -65,13 +69,11 @@ func _process(delta: float) -> void:
 			give_cards()
 	elif game_state == "play" && anim_done:
 		game_manager.camera_pos = table.get_tile_center(Vector2(1 + player_turn_index * 2.0, 4))
-		if game_manager.players[player_turn_index].is_local_player():
-			if game_manager.players[player_turn_index].action == "action1":
-				game_manager.players[player_turn_index].action = ""
-				hit()
-			elif game_manager.players[player_turn_index].action == "action2":
-				game_manager.players[player_turn_index].action = ""
-				stay()
+
+		if game_manager.players[player_turn_index].action == "action1":
+			hit()
+		elif game_manager.players[player_turn_index].action == "action2":
+			stay()
 
 func update_dealer_pos(pos: Vector2):
 	position = pos
@@ -93,7 +95,7 @@ func give_cards():
 		dealer_hand.push_back(index)
 		
 		game_manager.cards[index].default_pos =default_card_pos +  Vector2(-40 + i * 80, 160)
-		print(index)
+		
 		await get_tree().create_timer(0.2).timeout
 		if i == 0 || get_sum([dealer_hand[0], dealer_hand[1]]) == 21:
 			game_manager.cards[dealer_hand[i]].flip()
@@ -122,6 +124,7 @@ func hit():
 
 func stay():
 	player_turn_index += 1
+	player_turn_index = (player_turn_index + 1) % game_manager.players.size()
 	game_manager.players[player_turn_index].folded = true
 	pass
 
@@ -137,5 +140,4 @@ func get_sum(cards_arr: Array):
 	for a in range(aces):
 		if sum > 21:
 			sum -= 10
-	print(sum)
 	return sum

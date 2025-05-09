@@ -32,14 +32,17 @@ func _ready():
 func _process(delta: float) -> void:
 	game_manager.camera = camera
 	camera.move_to(game_manager.camera_pos, 50.0)
-	if game_manager.current_game == "BlackJack" && is_local_player():
-		if game_manager.current_game == "Menu":
+	if game_manager.should_reset_action == true:
+		action = "None"
+	if game_manager.current_game == "Menu":
 			$"Camera/UI/Menu/Lobby_text".text = "lobby:\n"
-			for i in $"../".get_children():
-				if i.get_class() == "Node2D":
-					$"Camera/UI/Menu/Lobby_text".text += i.user_name + "\n"
-			if is_multiplayer_authority() && $"Camera/UI/Menu/Lobby_text/Name".text != "":
-				user_name = $"Camera/UI/Menu/Lobby_text/Name".text
+			for p in game_manager.players:
+				$"Camera/UI/Menu/Lobby_text".text += p.user_name + "\n"
+			#if is_multiplayer_authority() && $"Camera/UI/Menu/Lobby_text".text != "":
+				#user_name = $"Camera/UI/Menu/Lobby_text".text
+	if game_manager.current_game == "BlackJack" && is_local_player():
+		$"Camera/UI/Blackjack/Money".text = "Money:" + str(money)
+		game_manager.server.get_node(str(name)).action = action
 	pass
 
 func _on_scene_change(scene_name: String):
@@ -53,13 +56,22 @@ func toggle_ready():
 		is_ready = !is_ready
 	
 func action1():
-	action = "action1"
+	if is_local_player():
+		action = "action1"
+		await get_tree().create_timer(1.0).timeout
+		action = "None"
 
 func action2():
-	action = "action2"
+	if is_local_player():
+		action = "action2"
+		await get_tree().create_timer(1.0).timeout
+		action = "None"
 
 func action3():
-	action = "action3"
+	if is_local_player():
+		action = "action3"
+		await get_tree().create_timer(1.0).timeout
+		action = "None"
 
 func is_local_player() -> bool:
 	return multiplayer.get_unique_id() == get_multiplayer_authority()

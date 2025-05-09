@@ -11,6 +11,7 @@ signal _on_scene_change(scene_name: String)
 @export var used_cards: int
 @onready var server = $"../Server"
 var scene
+@export var should_reset_action = false
 @export var scene_to_go_to = "None"
 @export var camera_pos: Vector2
 
@@ -90,6 +91,8 @@ func join_game():
 
 
 func _process(delta: float) -> void:
+	for p in players:
+		print(p.action)
 	if get_tree().get_current_scene() != null:
 		scene = get_tree().get_current_scene()
 	if scene_to_go_to == "BlackJack":
@@ -97,6 +100,14 @@ func _process(delta: float) -> void:
 		current_game = "BlackJack"
 		scene_to_go_to = "None"
 	pass
+
+
+func shuffle_cards():
+	cards.shuffle()
+	var index = 2
+	for c in cards:
+		c.z_index = index
+		index += 1
 
 func change_scene(scene: PackedScene):
 	for i in $"../".get_children():
