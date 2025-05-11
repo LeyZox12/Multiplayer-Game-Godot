@@ -1,5 +1,6 @@
 extends Control
 
+var last_bet:int
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -19,3 +20,8 @@ func _process(delta: float) -> void:
 		text += str($"Blackjack/Slider".value * $"../../".money)
 	$"Blackjack/Slider/Label".text = text
 	pass
+
+func get_bet() -> int:
+	if $"Blackjack/Slider".visible:
+		last_bet = $"Blackjack/Slider".value * $"../../".money
+	return last_bet

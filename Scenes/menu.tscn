@@ -1,13 +1,23 @@
-[gd_scene load_steps=4 format=3 uid="uid://kx7j120v8sir"]
+[gd_scene load_steps=6 format=3 uid="uid://kx7j120v8sir"]
 
 [ext_resource type="PackedScene" uid="uid://di063aviuwqrl" path="res://Assets/Prefabs/game_manager.tscn" id="1_hsakb"]
 [ext_resource type="PackedScene" uid="uid://bwsqmd0c84jbp" path="res://Assets/Prefabs/server.tscn" id="2_omo0u"]
+[ext_resource type="Material" uid="uid://chjxwcgrrfeo2" path="res://Assets/Shaders/background.tres" id="3_55e2e"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_gkrut"]
 
 [sub_resource type="Theme" id="Theme_0f8jk"]
 
 [node name="Menu" type="Node2D"]
 
 [node name="GameManager" parent="." instance=ExtResource("1_hsakb")]
+
+[node name="Sprite2D" type="Sprite2D" parent="GameManager"]
+z_index = -1
+material = ExtResource("3_55e2e")
+position = Vector2(908, -854)
+scale = Vector2(23983.2, 23983.2)
+texture = SubResource("PlaceholderTexture2D_gkrut")
 
 [node name="Server" parent="." instance=ExtResource("2_omo0u")]
 

@@ -25,6 +25,7 @@ func _add_player(id = 1):
 	instance.name = str(id)
 	instance.user_name = "guest" + str(id)
 	instance.id = id
+	game_manager.players_money[str(id)] = 1000
 	if id != multiplayer.get_unique_id():
 			instance.visible = false
 	call_deferred("add_child", instance)

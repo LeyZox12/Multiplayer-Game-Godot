@@ -54,11 +54,11 @@ text = "0"
 
 [node name="label2" type="Label" parent="."]
 z_index = 2
-offset_left = -119.701
-offset_top = -146.301
-offset_right = 398.299
-offset_bottom = 202.699
-rotation = -3.14159
+offset_left = -215.461
+offset_top = -340.482
+offset_right = 302.539
+offset_bottom = 8.51834
+rotation = -6.28318
 scale = Vector2(0.543022, 0.543022)
 theme = SubResource("Theme_3wtwt")
 theme_override_colors/font_color = Color(0, 0, 0, 1)

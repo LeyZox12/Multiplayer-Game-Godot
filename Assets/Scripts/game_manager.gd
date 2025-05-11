@@ -14,6 +14,8 @@ var scene
 @export var should_reset_action = false
 @export var scene_to_go_to = "None"
 @export var camera_pos: Vector2
+@export var folded_players:Array
+@export var players_money:Dictionary
 
 var camera
 # Called when the node enters the scene tree for the first time.
@@ -27,7 +29,7 @@ func _ready() -> void:
 		preload("res://Assets/Sprites/games/blackjack_icon.png")
 	)
 	scene = $"../"
-
+	camera_pos = Vector2(get_viewport().size / 2.0)
 	if server == null:
 		server = $"../Server"
 	
@@ -63,6 +65,11 @@ func add_card(pos: Vector2, value: int, suit: int, scale: float, flipped: bool =
 	cards.push_back(instance)
 	return instance
 
+func get_local_player():
+	for p in players:
+		if p.is_local_player():
+			return p
+
 func build_table(size: Vector2, tile_size: int, offset: Vector2):
 	$Table.build(size, tile_size, offset)
 
@@ -91,8 +98,6 @@ func join_game():
 
 
 func _process(delta: float) -> void:
-	for p in players:
-		print(p.action)
 	if get_tree().get_current_scene() != null:
 		scene = get_tree().get_current_scene()
 	if scene_to_go_to == "BlackJack":
@@ -103,6 +108,7 @@ func _process(delta: float) -> void:
 
 
 func shuffle_cards():
+	used_cards = 0
 	cards.shuffle()
 	var index = 2
 	for c in cards:
