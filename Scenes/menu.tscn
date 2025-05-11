@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://kx7j120v8sir"]
+[gd_scene load_steps=8 format=3 uid="uid://kx7j120v8sir"]
 
 [ext_resource type="PackedScene" uid="uid://di063aviuwqrl" path="res://Assets/Prefabs/game_manager.tscn" id="1_hsakb"]
 [ext_resource type="PackedScene" uid="uid://bwsqmd0c84jbp" path="res://Assets/Prefabs/server.tscn" id="2_omo0u"]
 [ext_resource type="Material" uid="uid://chjxwcgrrfeo2" path="res://Assets/Shaders/background.tres" id="3_55e2e"]
+[ext_resource type="Script" path="res://Assets/Scripts/save.gd" id="4_supr5"]
+[ext_resource type="Script" path="res://Assets/Scripts/saved_ips.gd" id="5_cyjiv"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_gkrut"]
 
@@ -31,7 +33,7 @@ offset_right = 1154.0
 offset_bottom = 648.0
 theme = SubResource("Theme_0f8jk")
 
-[node name="Buttons" type="VBoxContainer" parent="Control"]
+[node name="Buttons" type="Control" parent="Control"]
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 8
@@ -50,11 +52,56 @@ pivot_offset = Vector2(98.83, 31.735)
 
 [node name="Host" type="Button" parent="Control/Buttons"]
 layout_mode = 2
+offset_right = 200.0
+offset_bottom = 31.0
 text = "Host"
 
 [node name="Join" type="Button" parent="Control/Buttons"]
 layout_mode = 2
+offset_top = 35.0
+offset_right = 200.0
+offset_bottom = 66.0
 text = "Join"
+
+[node name="Adress" type="TextEdit" parent="Control/Buttons/Join"]
+layout_mode = 0
+offset_left = -0.0222327
+offset_top = 42.2779
+offset_right = 199.978
+offset_bottom = 92.2779
+placeholder_text = "Ip adress or name"
+
+[node name="Save" type="Button" parent="Control/Buttons"]
+layout_mode = 2
+offset_left = -0.0222327
+offset_top = 139.821
+offset_right = 199.978
+offset_bottom = 170.821
+text = "Save IP Adress
+(format xxx.xxx.x.x/name)"
+script = ExtResource("4_supr5")
+
+[node name="Saved_ips" type="Label" parent="Control/Buttons"]
+layout_mode = 1
+offset_left = -296.929
+offset_top = -144.028
+offset_right = -168.929
+offset_bottom = -121.028
+text = "Saved IP Names:"
+script = ExtResource("5_cyjiv")
+
+[node name="Container" type="VBoxContainer" parent="Control/Buttons/Saved_ips"]
+layout_mode = 0
+offset_top = 22.6804
+offset_right = 40.0
+offset_bottom = 62.6804
+
+[node name="Refresh" type="Button" parent="Control/Buttons/Saved_ips"]
+layout_mode = 0
+offset_left = 137.457
+offset_top = 4.81099
+offset_right = 167.457
+offset_bottom = 34.811
 
 [node name="Games_Container" type="GridContainer" parent="Control"]
 visible = false
@@ -72,3 +119,6 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(9.73879, 9.04877)
 columns = 3
+
+[connection signal="button_down" from="Control/Buttons/Save" to="Control/Buttons/Save" method="save_file"]
+[connection signal="button_down" from="Control/Buttons/Saved_ips/Refresh" to="Control/Buttons/Saved_ips" method="load_saved"]

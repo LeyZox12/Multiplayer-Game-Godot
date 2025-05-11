@@ -10,28 +10,28 @@
 properties/0/path = NodePath("Dealer:player_turn_index")
 properties/0/spawn = true
 properties/0/replication_mode = 1
-properties/1/path = NodePath("Dealer:position")
+properties/1/path = NodePath("Dealer:game_state")
 properties/1/spawn = true
 properties/1/replication_mode = 1
-properties/2/path = NodePath("Dealer:game_state")
+properties/2/path = NodePath("Dealer/Won:position")
 properties/2/spawn = true
 properties/2/replication_mode = 1
-properties/3/path = NodePath("Dealer/Won:position")
+properties/3/path = NodePath("Dealer/Won:rotation")
 properties/3/spawn = true
 properties/3/replication_mode = 1
-properties/4/path = NodePath("Dealer/Won:rotation")
+properties/4/path = NodePath("Dealer/Lost:position")
 properties/4/spawn = true
 properties/4/replication_mode = 1
-properties/5/path = NodePath("Dealer/Lost:position")
+properties/5/path = NodePath("Dealer/Lost:rotation")
 properties/5/spawn = true
 properties/5/replication_mode = 1
-properties/6/path = NodePath("Dealer/Lost:rotation")
+properties/6/path = NodePath("Dealer/Tie:position")
 properties/6/spawn = true
 properties/6/replication_mode = 1
-properties/7/path = NodePath("Dealer/Tie:position")
+properties/7/path = NodePath("Dealer/Tie:rotation")
 properties/7/spawn = true
 properties/7/replication_mode = 1
-properties/8/path = NodePath("Dealer/Tie:rotation")
+properties/8/path = NodePath("Dealer/Sprite:position")
 properties/8/spawn = true
 properties/8/replication_mode = 1
 
@@ -87,20 +87,6 @@ z_index = -1
 scale = Vector2(2.88547, 2.88547)
 script = ExtResource("2_kdgjt")
 
-[node name="Won" type="Label" parent="Dealer"]
-z_index = 54
-offset_left = -1313.48
-offset_top = -304.283
-offset_right = -1061.48
-offset_bottom = -167.283
-scale = Vector2(0.22955, 0.22955)
-pivot_offset = Vector2(126, 68.5)
-theme_override_colors/font_color = Color(0.301961, 0.780392, 0.105882, 1)
-theme_override_constants/outline_size = 45
-theme_override_font_sizes/font_size = 100
-text = "WON"
-script = ExtResource("5_ydg4p")
-
 [node name="Lost" type="Label" parent="Dealer"]
 z_index = 54
 offset_left = -1310.36
@@ -113,6 +99,20 @@ theme_override_colors/font_color = Color(1, 0, 0, 1)
 theme_override_constants/outline_size = 45
 theme_override_font_sizes/font_size = 100
 text = "LOST"
+script = ExtResource("5_ydg4p")
+
+[node name="Won" type="Label" parent="Dealer"]
+z_index = 54
+offset_left = -1310.36
+offset_top = -290.767
+offset_right = -1058.36
+offset_bottom = -153.767
+scale = Vector2(0.22955, 0.22955)
+pivot_offset = Vector2(126, 68.5)
+theme_override_colors/font_color = Color(0.0926803, 0.900655, 0.0448905, 1)
+theme_override_constants/outline_size = 45
+theme_override_font_sizes/font_size = 100
+text = "WON"
 script = ExtResource("5_ydg4p")
 
 [node name="Tie" type="Label" parent="Dealer"]
@@ -133,7 +133,6 @@ script = ExtResource("5_ydg4p")
 
 [node name="Head" type="Sprite2D" parent="Dealer/Sprite"]
 position = Vector2(0, -63.189)
-scale = Vector2(1, 1)
 texture = ExtResource("2_wnj33")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Dealer/Sprite/Head"]
@@ -143,5 +142,4 @@ libraries = {
 
 [node name="Body" type="Sprite2D" parent="Dealer/Sprite"]
 position = Vector2(0, -63.189)
-scale = Vector2(1, 1)
 texture = ExtResource("3_6qw0j")
